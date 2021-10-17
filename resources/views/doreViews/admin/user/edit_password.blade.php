@@ -2,8 +2,6 @@
 
 @section('admin')
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
     <div class="col-12">
         <h5 class="mb-4">{{__('Change Password')}}</h5>
 

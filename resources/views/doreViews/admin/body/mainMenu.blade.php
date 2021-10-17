@@ -9,20 +9,23 @@
     <div class="main-menu">
         <div class="scroll">
             <ul class="list-unstyled">
-                <li class="active">
+                <li class="{{ ($route == 'dashboard' or $prefix =='/users')?'active':'' }}">
                     <a href="#dashboard">
-                        <i class="iconsminds-shop-4"></i>
-                        <span>Dashboards</span>
+                        <i class="simple-icon-speedometer"></i>
+                        <span>{{__('Dashboards')}}</span>
                     </a>
                 </li>
-                <li>
+                @if(Auth::user()->role == 'Admin')
+                <li class="{{ ($prefix =='/setups')?'active':'' }}">
                     <a href="#layouts">
-                        <i class="iconsminds-digital-drawing"></i> Pages
+                        <i class="simple-icon-settings"></i> {{ __('Setups')}}
                     </a>
                 </li>
-                <li>
+                @endif
+
+                <li class="{{ ($prefix =='/students')?'active':'' }}">
                     <a href="#applications">
-                        <i class="iconsminds-air-balloon-1"></i> Applications
+                        <i class="simple-icon-graduation"></i> Students
                     </a>
                 </li>
                 <li>
@@ -57,197 +60,124 @@
                         <i class="iconsminds-dashboard"></i> <span class="d-inline-block">{{__('Dashboard')}}</span>
                     </a>
                 </li>
-                <li class="{{ ($prefix == '/users')?'active':'' }}">
-                    <a href=" {{ Route('users.view') }}">
-                        <i class="iconsminds-conference"></i> <span
-                            class="d-inline-block"> {{ __('Manage Users') }}</span>
-                    </a>
-                </li>
+
 
             </ul>
             <ul class="list-unstyled" data-link="layouts" id="layouts">
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#collapseAuthorization" aria-expanded="true"
                        aria-controls="collapseAuthorization" class="rotate-arrow-icon opacity-50">
-                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Authorization</span>
+                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Students</span>
                     </a>
                     <div id="collapseAuthorization" class="collapse show">
                         <ul class="list-unstyled inner-level-menu">
-                            <li>
-                                <a href="Pages.Auth.Login.html">
-                                    <i class="simple-icon-user-following"></i> <span
-                                        class="d-inline-block">Login</span>
+                            <li class="{{ ($route == 'student.class.view')?'active':'' }}">
+                                <a href="{{ route('student.class.view') }}">
+                                    <i class="iconsminds-student-hat"></i> <span
+                                        class="d-inline-block">Student Class</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Auth.Register.html">
-                                    <i class="simple-icon-user-follow"></i> <span
-                                        class="d-inline-block">Register</span>
+                            <li class="{{ ($route == 'student.year.view')?'active':'' }}">
+                                <a href="{{ route('student.year.view') }}">
+                                    <i class="iconsminds-calendar-4"></i> <span
+                                        class="d-inline-block">Student Year</span>
+                                </a>
+                            </li >
+                            <li class="{{ ($route == 'student.group.view')?'active':'' }}">
+                                <a href="{{ route('student.group.view') }}">
+                                    <i class="iconsminds-students"></i> <span
+                                        class="d-inline-block">Student Group</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Auth.ForgotPassword.html">
-                                    <i class="simple-icon-user-unfollow"></i> <span class="d-inline-block">Forgot
-                                            Password</span>
+                            <li class="{{ ($route == 'student.shift.view')?'active':'' }}">
+                                <a href="{{ route('student.shift.view') }}">
+                                    <i class="iconsminds-student-hat"></i> <span
+                                        class="d-inline-block">Student Shift</span>
                                 </a>
                             </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
-                       aria-controls="collapseProduct" class="rotate-arrow-icon opacity-50">
-                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Product</span>
-                    </a>
-                    <div id="collapseProduct" class="collapse show">
-                        <ul class="list-unstyled inner-level-menu">
-                            <li>
-                                <a href="Pages.Product.List.html">
-                                    <i class="simple-icon-credit-card"></i> <span class="d-inline-block">Data
-                                            List</span>
+                            <li class="{{ ($route == 'fee.category.view')?'active':'' }}">
+                                <a href="{{ route('fee.category.view') }}">
+                                    <i class="iconsminds-box-with-folders"></i> <span
+                                        class="d-inline-block">Fee category</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Product.Thumbs.html">
-                                    <i class="simple-icon-list"></i> <span class="d-inline-block">Thumb
-                                            List</span>
+                            <li class="{{ ($route == 'fee.amount.view')?'active':'' }}">
+                                <a href="{{ route('fee.amount.view') }}">
+                                    <i class="iconsminds-money-bag"></i> <span
+                                        class="d-inline-block">Fee Amount</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Product.Images.html">
-                                    <i class="simple-icon-grid"></i> <span class="d-inline-block">Image
-                                            List</span>
+                            <li class="{{ ($route == 'exam.type.view')?'active':'' }}">
+                                <a href="{{ route('exam.type.view') }}">
+                                    <i class="iconsminds-money-bag"></i> <span
+                                        class="d-inline-block">Exam Type</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Product.Detail.html">
-                                    <i class="simple-icon-book-open"></i> <span class="d-inline-block">Detail</span>
+
+                            <li class="{{ ($route == 'setup.subject.view')?'active':'' }}">
+                                <a href="{{ route('setup.subject.view') }}">
+                                    <i class="iconsminds-notepad"></i> <span
+                                        class="d-inline-block">School Subject</span>
                                 </a>
                             </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#collapseProfile" aria-expanded="true"
-                       aria-controls="collapseProfile" class="rotate-arrow-icon opacity-50">
-                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Profile</span>
-                    </a>
-                    <div id="collapseProfile" class="collapse show">
-                        <ul class="list-unstyled inner-level-menu">
-                            <li>
-                                <a href="Pages.Profile.Social.html">
-                                    <i class="simple-icon-share"></i> <span class="d-inline-block">Social</span>
+                            <li class="{{ ($route == 'assign.subject.view')?'active':'' }}">
+                                <a href="{{ route('assign.subject.view') }}">
+                                    <i class="iconsminds-books"></i> <span
+                                        class="d-inline-block">Assign Subject</span>
                                 </a>
                             </li>
-                            <li>
-                                <a href="Pages.Profile.Portfolio.html">
-                                    <i class="simple-icon-link"></i> <span class="d-inline-block">Portfolio</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#collapseBlog" aria-expanded="true"
-                       aria-controls="collapseBlog" class="rotate-arrow-icon opacity-50">
-                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Blog</span>
-                    </a>
-                    <div id="collapseBlog" class="collapse show">
-                        <ul class="list-unstyled inner-level-menu">
-                            <li>
-                                <a href="Pages.Blog.html">
-                                    <i class="simple-icon-list"></i> <span class="d-inline-block">List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Blog.Detail.html">
-                                    <i class="simple-icon-book-open"></i> <span class="d-inline-block">Detail</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Blog.Detail.Alt.html">
-                                    <i class="simple-icon-picture"></i> <span class="d-inline-block">Detail
-                                            Alt</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#collapseMisc" aria-expanded="true"
-                       aria-controls="collapseMisc" class="rotate-arrow-icon opacity-50">
-                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Miscellaneous</span>
-                    </a>
-                    <div id="collapseMisc" class="collapse show">
-                        <ul class="list-unstyled inner-level-menu">
-                            <li>
-                                <a href="Pages.Misc.Coming.Soon.html">
-                                    <i class="simple-icon-hourglass"></i> <span class="d-inline-block">Coming
-                                            Soon</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Error.html">
-                                    <i class="simple-icon-exclamation"></i> <span
-                                        class="d-inline-block">Error</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Faq.html">
-                                    <i class="simple-icon-question"></i> <span class="d-inline-block">Faq</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Invoice.html">
-                                    <i class="simple-icon-bag"></i> <span class="d-inline-block">Invoice</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Knowledge.Base.html">
-                                    <i class="simple-icon-graduation"></i> <span class="d-inline-block">Knowledge
-                                            Base</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Mailing.html">
-                                    <i class="simple-icon-envelope-open"></i> <span
-                                        class="d-inline-block">Mailing</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Pricing.html">
-                                    <i class="simple-icon-diamond"></i> <span class="d-inline-block">Pricing</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Misc.Search.html">
-                                    <i class="simple-icon-magnifier"></i> <span class="d-inline-block">Search</span>
+                            <li class="{{ ($route == 'designation.view')?'active':'' }}">
+                                <a href="{{ route('designation.view') }}">
+                                    <i class="iconsminds-user"></i> <span
+                                        class="d-inline-block">Designation</span>
                                 </a>
                             </li>
 
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <a href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
+                       aria-controls="collapseProduct" class="rotate-arrow-icon opacity-50">
+                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">{{__('Users')}}</span>
+                    </a>
+                    <div id="collapseProduct" class="collapse show">
+                        <ul class="list-unstyled inner-level-menu">
+                            <li class="{{ ($prefix == '/users')?'active':'' }}">
+                                <a href=" {{ Route('users.view') }}">
+                                    <i class="iconsminds-conference"></i> <span
+                                        class="d-inline-block"> {{ __('Manage Users') }}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
             </ul>
             <ul class="list-unstyled" data-link="applications">
-                <li>
-                    <a href="Apps.MediaLibrary.html">
-                        <i class="simple-icon-picture"></i> <span class="d-inline-block">Library</span>
+                <li class="{{ ($route =='student.registration.view')?'active':'' }}">
+                    <a href="{{ route('student.registration.view') }}">
+                        <i class="simple-icon-picture"></i> <span class="d-inline-block">Student Registration</span>
                     </a>
                 </li>
-                <li>
-                    <a href="Apps.Todo.List.html">
-                        <i class="simple-icon-check"></i> <span class="d-inline-block">Todo</span>
+                <li class="{{ ($route =='roll.generate.view')?'active':'' }}">
+                    <a href="{{ route('roll.generate.view') }}">
+                        <i class="simple-icon-check"></i> <span class="d-inline-block">Roll Generate</span>
                     </a>
                 </li>
-                <li>
-                    <a href="Apps.Survey.List.html">
-                        <i class="simple-icon-calculator"></i> <span class="d-inline-block">Survey</span>
+                <li class="{{ ($route =='registration.fee.view')?'active':'' }}">
+                    <a href="{{ route('registration.fee.view') }}">
+                        <i class="simple-icon-calculator"></i> <span class="d-inline-block">Registration Fee</span>
                     </a>
                 </li>
-                <li>
-                    <a href="Apps.Chat.html">
-                        <i class="simple-icon-bubbles"></i> <span class="d-inline-block">Chat</span>
+                <li class="{{ ($route =='monthly.fee.view')?'active':'' }}">
+                    <a href="{{ route('monthly.fee.view') }}">
+                        <i class="simple-icon-calculator"></i> <span class="d-inline-block">Monthly Fee</span>
+                    </a>
+                </li>
+                <li class="{{ ($route =='exam.fee.view')?'active':'' }}">
+                    <a href="{{ route('exam.fee.view') }}">
+                        <i class="simple-icon-bubbles"></i> <span class="d-inline-block">Exam Fee</span>
                     </a>
                 </li>
             </ul>

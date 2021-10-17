@@ -5,7 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <div class="col-12">
-        <h5 class="mb-4">{{__('Information Utilisateur')}}</h5>
+        <h5 class="mb-4">{{__('Update User')}}</h5>
 
         <div class="card mb-4">
             <div class="card-body">
@@ -14,25 +14,57 @@
                       action="{{ route('users.update',$editData->id) }}" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="form-group position-relative error-l-50">
-                        <label>Name</label><span class="text-danger">*</span>
-                        <input type="text" name="name" class="form-control" value="{{ $editData->name }}">
-                        <div class="invalid-tooltip">
-                            {{__('Name is required')}}
-                        </div>
+                    <div class="row">
+                        <div class="col-md-6" >
 
-                    </div>
+                            <div class="form-group">
+                                <h5>User Role <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <select name="role"  required="" class="form-control">
+                                        <option value="" selected="" disabled="">Select Role</option>
+                                        <option value="Admin" {{ ($editData->role == "Admin" ? "selected": "") }}  >Admin</option>
+                                        <option value="Operator" {{ ($editData->role == "Operator" ? "selected": "") }} >Operator</option>
 
-                    <div class="form-group position-relative error-l-50">
-                        <label>E-mail</label><span class="text-danger">*</span>
-                        <input type="email" name="email" class="form-control" value=" {{ $editData->email }}">
-                        @error('email')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-                        <div class="invalid-tooltip">
-                            {{__('email is required')}}
-                        </div>
-                    </div>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> <!-- End Col Md-6 -->
+
+                        <div class="col-md-6" >
+                            <div class="form-group">
+                                <h5>User Name <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="text" name="name" class="form-control" value="{{ $editData->name }}" required="">  </div>
+
+                            </div>
+
+                        </div><!-- End Col Md-6 -->
+
+
+                    </div> <!-- End Row -->
+
+
+
+                    <div class="row">
+                        <div class="col-md-6" >
+
+                            <div class="form-group">
+                                <h5>User Email <span class="text-danger">*</span></h5>
+                                <div class="controls">
+                                    <input type="email" name="email" class="form-control" value="{{ $editData->email }}" required="">  </div>
+
+                            </div>
+
+                        </div> <!-- End Col Md-6 -->
+
+                        <div class="col-md-6" >
+
+
+
+                        </div><!-- End Col Md-6 -->
+
+
+                    </div> <!-- End Row -->
 
                     <div class="form-group position-relative error-l-50">
                         <label>Profile Image</label><span class="text-danger">*</span>
